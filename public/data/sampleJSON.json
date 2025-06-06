@@ -1,0 +1,178 @@
+{
+  "nodes": [
+    {
+      "name": "minikube",
+      "status": "True",
+      "ip": "192.168.49.2",
+      "cpu": "16",
+      "memory": "7825748",
+      "pods": [
+        {
+          "name": "coredns-668d6bf9bc-cjpjd",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:52Z",
+          "containers": [
+            {
+              "name": "coredns",
+              "image": "registry.k8s.io/coredns/coredns:v1.11.3",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        },
+        {
+          "name": "etcd-minikube",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:47Z",
+          "containers": [
+            {
+              "name": "etcd",
+              "image": "registry.k8s.io/etcd:3.5.16-0",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        },
+        {
+          "name": "kube-apiserver-minikube",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:47Z",
+          "containers": [
+            {
+              "name": "kube-apiserver",
+              "image": "registry.k8s.io/kube-apiserver:v1.32.0",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        },
+        {
+          "name": "kube-controller-manager-minikube",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:47Z",
+          "containers": [
+            {
+              "name": "kube-controller-manager",
+              "image": "registry.k8s.io/kube-controller-manager:v1.32.0",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        },
+        {
+          "name": "kube-proxy-2wqxj",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:52Z",
+          "containers": [
+            {
+              "name": "kube-proxy",
+              "image": "registry.k8s.io/kube-proxy:v1.32.0",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        },
+        {
+          "name": "kube-scheduler-minikube",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:47Z",
+          "containers": [
+            {
+              "name": "kube-scheduler",
+              "image": "registry.k8s.io/kube-scheduler:v1.32.0",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        },
+        {
+          "name": "storage-provisioner",
+          "namespace": "kube-system",
+          "status": "Running",
+          "startTime": "2025-05-20T17:29:51Z",
+          "containers": [
+            {
+              "name": "storage-provisioner",
+              "image": "gcr.io/k8s-minikube/storage-provisioner:v5",
+              "ready": true
+            }
+          ],
+          "deployment": null,
+          "services": null
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "name": "coredns",
+      "namespace": "kube-system",
+      "replicas": 1,
+      "availableReplicas": 1
+    }
+  ],
+  "services": [
+    {
+      "name": "kubernetes",
+      "namespace": "default",
+      "type": "ClusterIP",
+      "clusterIP": "10.96.0.1",
+      "ports": [
+        {
+          "port": 443,
+          "targetPort": 8443
+        }
+      ],
+      "selector": {}
+    },
+    {
+      "name": "kube-dns",
+      "namespace": "kube-system",
+      "type": "ClusterIP",
+      "clusterIP": "10.96.0.10",
+      "ports": [
+        {
+          "port": 53,
+          "targetPort": 53
+        },
+        {
+          "port": 53,
+          "targetPort": 53
+        },
+        {
+          "port": 9153,
+          "targetPort": 9153
+        }
+      ],
+      "selector": {
+        "k8s-app": "kube-dns"
+      }
+    }
+  ],
+  "namespaces": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "kube-node-lease"
+    },
+    {
+      "name": "kube-public"
+    },
+    {
+      "name": "kube-system"
+    }
+  ]
+}
