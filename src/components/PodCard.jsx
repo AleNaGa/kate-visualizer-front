@@ -2,14 +2,28 @@ import React from "react";
 import { CheckCircle, XCircle, Info, Clock } from "lucide-react";
 
 
+/**
+ * Un componente React que muestra la información de un pod, incluyendo su nombre, estado, tiempo de inicio, contenedores y servicios.
+ *
+ * @prop {Object} pod - el propio pod
+ * @prop {string} pod.name - El nombre del pod.
+ * @prop {string} pod.status - El estado del pod.
+ * @prop {string} pod.startTime - El tiempo de inicio del pod.
+ * @prop {Array} pod.containers - Un array de objetos que representan los contenedores del pod.
+ * @prop {Array} pod.services - Un array de strings que representan los servicios del pod.
+ *
+ * @return {React.ReactElement} 
+ */
 function PodCard({ pod }) {
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
+    // Mostrar la tarjeta solo si el pod está disponible
     if (pod) {
       setVisible(true);
     }
   }, [pod])
+  // Si el pod no está disponible, no mostrar la tarjeta
   if (!pod) return null;
 
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+//PRUEBA DE HOOK DE DATOS con MOCK
 export const useData = () => {
   const [data, setData] = useState(null);
 

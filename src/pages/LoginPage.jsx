@@ -3,11 +3,24 @@ import { useNavigate } from "react-router-dom";
 import fetchLogin from "../components/hooks/fetchLogin";
 import BubblesBackground from "../components/BubblesBackground";
 
+/**
+ * Página de inicio de sesión que muestra un formulario para que el usuario
+ * ingrese la URL del servidor de la API de Kubernetes y su token de autenticación.
+ * Al hacer clic en el botón "Login", se intenta logear en el cluster y
+ *  se redirige al usuario a la página del visualizador. Si ocurre un error,
+ * se muestra un mensaje de error 3 segundos.
+ * @returns {JSX.Element} El componente de React, que representa la página de inicio de sesión ( evidente).
+ */
 function LoginPage() {
   const [apiUrl, setApiUrl] = useState("");
   const [token, setToken] = useState("");
   const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
+
+/**
+ * Maneja el evento de clic en el botón "Login". Intenta iniciar sesión en el cluster usando la URL de la API y el token proporcionados.
+ * Si es correcto, se redirige al usuario a la página del visualizador y se guarda la sesión en el almacenamiento local.
+ */
 
   const handleLogin = async () => {
     try {
@@ -19,6 +32,7 @@ function LoginPage() {
       setToastMessage("Error al iniciar sesión: " + err.message);
     }
   };
+  // El toast este para los mensajes
   useEffect(() => {
     if (toastMessage) {
       const timeout = setTimeout(() => setToastMessage(null), 3000);
@@ -42,6 +56,7 @@ function LoginPage() {
             className="
               w-60 mb-5 px-5 py-3 rounded-full
               border-2 bg-white/90 text-lime-700
+               border-gray-400
               placeholder-gray-600 placeholder-opacity-80
               shadow-inner
               transition-all duration-500 ease-in-out
@@ -57,6 +72,7 @@ function LoginPage() {
             className="
               w-60 mb-8 px-5 py-3 rounded-full
               border-2 bg-white/90 text-lime-700
+              border-gray-400
               placeholder-gray-600 placeholder-opacity-80
               shadow-inner
               transition-all duration-500 ease-in-out
@@ -79,7 +95,7 @@ function LoginPage() {
         </div>
       </div>
 
-    <div className="absolute  bg-[url('/Footer.png')] bg-contain bg-no-repeat bg-left bottom-0 left-0 w-full h-1/6 z-10">
+    <div className="absolute  bg-[url('/Footer.png')] bg-contain bg-no-repeat bg-left bottom-0 left-0 w-full h-1/8 z-10">
 
 
 
