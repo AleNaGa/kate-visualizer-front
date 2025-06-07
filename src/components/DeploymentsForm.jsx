@@ -75,11 +75,11 @@ export default function DeploymentsForm({ data }) {
           </h2>
 
           {data?.deployments?.length > 0 ? (
-            <div className="space-y-4">
+            <div className="max-h-[60vh] overflow-y-auto pr-2 space-y-4 scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-transparent">
               {data.deployments.map((deployment) => (
                 <div
                   key={deployment.name}
-                  className="p-4 border border-white/10 rounded-xl shadow-sm flex flex-col gap-4"
+                  className="p-4 border border-white/10 rounded-xl shadow-sm flex flex-col gap-4 bg-gradient-to-b from-cyan-900 to-gray-400 "
                 >
                   <div className="text-left space-y-1">
                     <h2 className="text-xl font-semibold">{deployment.name}</h2>
