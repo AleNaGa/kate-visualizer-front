@@ -301,7 +301,7 @@ kubectl cluster-info
 
 ## Enlace a la documentación
 
-# **TO DO**
+[Documentación creada en Notion](https://www.notion.so/K-A-T-E-20c238efeaa380e2be49f870a685aa0d?source=copy_link)
 
 
 
