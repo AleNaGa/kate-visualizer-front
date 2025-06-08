@@ -75,7 +75,7 @@ export default function DeploymentsForm({ data }) {
           </h2>
 
           {data?.deployments?.length > 0 ? (
-            <div className="max-h-[60vh] overflow-y-auto pr-2 space-y-4 scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-transparent">
+            <div className="max-h-[60vh] overflow-y-auto pr-2 space-y-4 ">
               {data.deployments.map((deployment) => (
                 <div
                   key={deployment.name}
