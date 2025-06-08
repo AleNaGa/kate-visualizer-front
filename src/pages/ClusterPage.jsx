@@ -6,16 +6,38 @@ import { useClusterData } from "../components/hooks/useClusterData";
 import GradientBackground from "../components/GradientBackground";
 import PodCard from "../components/PodCard";
 import DeploymentsForm from "../components/DeploymentsForm";
+import { useNavigate } from "react-router-dom";
 
+/**
+ * Página principal del Cluster Visualizer.
+ *
+ * Muestra una visualización 3D de los nodos del cluster, con esferas que
+ * representan los pods. Cada esfera tiene un color y un label que indica el
+ * nombre del pod.
+ *
+ * Al hacer clic en una esfera, se muestra una tarjeta con información del pod
+ * correspondiente. Si se hace clic en la esfera central, se muestra un formulario
+ * para crear despliegues.
+ *
+ * @returns {JSX.Element} El JSX para la página principal del Cluster Visualizer.
+ */
 function ClusterPage() {
-  const data = useClusterData(10000);
+  // Obtener el estado del cluster cada 5 segundos
+  const data = useClusterData(5000);
 
+  // Navegación
+  const navigate = useNavigate();
+
+  // Referencias para la escena y la cámara
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
+  // Referencia para el canvas
   const canvasRef = useRef(null);
   const canvasInitialized = useRef(false);
+  // Referencia para la escena
   const sceneInitRef = useRef(null);
 
+  // Configuración de la escena, primero el fondo y luego las esferas
   const radius = 7;
   const [colors, setColors] = useState([]);
   const [names, setNames] = useState([]);
@@ -26,6 +48,7 @@ function ClusterPage() {
   const handleClick = useCallback((event) => {
     if (!sceneInitRef.current || !sceneRef.current || !cameraRef.current) return;
 
+    // Calcular la posición del ratón en la escena para el raycaster y que no haga collide con objetos no relevantes
     const canvasBounds = sceneInitRef.current.renderer.domElement.getBoundingClientRect();
     const mouse = new THREE.Vector2(
       ((event.clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1,
@@ -36,12 +59,14 @@ function ClusterPage() {
     raycaster.setFromCamera(mouse, cameraRef.current);
     const intersects = raycaster.intersectObjects(sceneRef.current.children, true);
 
+    // Verificar si se hizo clic en una esfera
     let clicked = false;
     for (let i = 0; i < intersects.length; i++) {
       let obj = intersects[i].object;
       while (obj && !obj.userData?.onClick && obj.parent) {
         obj = obj.parent;
       }
+      // Si se hizo clic en una esfera
       if (obj?.userData?.onClick) {
         obj.userData.onClick();
         clicked = true;
@@ -49,6 +74,7 @@ function ClusterPage() {
       }
     }
 
+    // Si no se hizo clic en una esfera, resetear la cámara y quitar la tarjeta
     if (!clicked) {
       sceneInitRef.current.resetCamera();
       setSelectedPod(null);
@@ -93,6 +119,7 @@ function ClusterPage() {
   }, [data]);
 
     
+  // Actualiza las esferas con los nuevos nombres y colores
   useEffect(() => {
   if (!sceneInitRef.current || !sceneInitRef.current.renderer) return;
 
@@ -100,10 +127,12 @@ function ClusterPage() {
   canvas.addEventListener("click", handleClick);
 
   return () => {
+    // Limpia el canvas del evento de clic
     canvas.removeEventListener("click", handleClick);
   };
 }, [colors, names, handleClick]);
 
+  // Muestra un mensaje de carga mientras se cargan los datos, ACTUALIZAR CON ANIMACIÓN
   if (!data?.nodes) return <div>Cargando datos...</div>;
 
 
@@ -134,6 +163,11 @@ function ClusterPage() {
 
       {sceneRef.current &&
         colors.map((color, idx) => {
+          // Calcular la posición de la esfera en base al radio que hemos especificado. 
+          // La fórmula es: x = r * cos(θ), y = r * sin(θ) donde θ es el ángulo en radianes.
+          // Significa que cada esfera estara en un angulo diferente, de 0 a 360 grados
+          // dependiendo de la cantidad de esferas que hay y el radio que hemos especificado
+          // las esferas se ubicaran en un circulo y las distancias entre ellas seran iguales
           const angle = (2 * Math.PI) / colors.length * idx;
           const x = radius * Math.cos(angle);
           const y = radius * Math.sin(angle);
@@ -178,6 +212,17 @@ function ClusterPage() {
           </div>
         </div>
       )}
+   
+        <button
+         onClick={() => {
+              localStorage.clear(); // Limpiar el almacenamiento local para cerrar la sesión
+              navigate(-1);         // Redirigir a la página anterior
+            }}
+          className="absolute top-4 left-4 px-4 py-2 bg-gradient-to-b from-gray-500 to-gray-100 border-0 hover:scale-105 text-white font-bold rounded z-30"
+        >
+          Volver
+        </button>
+
     </>
   );
 }

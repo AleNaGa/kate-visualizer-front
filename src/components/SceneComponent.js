@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import SceneInit from "./SceneInit";
-
+//NO se usa
 const SceneComponent = ({ canvasID = "webgl-canvas", onSceneReady }) => {
   const sceneInitRef = useRef(null);
-  const [scene, setScene] = useState(null);
+  const [ setScene] = useState(null);
 
   useEffect(() => {
     const sceneInit = new SceneInit(canvasID);

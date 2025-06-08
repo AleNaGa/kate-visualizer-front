@@ -1,5 +1,19 @@
 import React, { useEffect, useRef } from "react";
 
+/**
+ * GradientBackground
+ *
+ * Un componente que dibuja un fondo de pantalla
+ * con un gradiente vertical con los colores dados.
+ *
+ * @param {{ colors: string[], style: object }} props
+ * @property {string[]} colors - Un array de colores en formato hex
+ * @property {object} style - Un objeto que contiene estilos CSS para el
+ *                            canvas
+ *
+ * @returns {React.Component} Un componente que contiene un canvas
+ *                            con el gradiente
+ */
 export default function GradientBackground({ colors = ["#1e3c72", "#2a5298"], style }) {
   const canvasRef = useRef();
 

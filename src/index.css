@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;700&display=swap');
+@import "tailwindcss";
+
 
 @font-face {
   font-family: 'neuropol';
