@@ -307,7 +307,7 @@ kubectl cluster-info
 
 ## Figma
 
-# **TO DO**
+[Diseño y Elementos creados en Figma](https://www.figma.com/design/lVCLtFsGIUxbQjQpefdIWA/TFG-KATE?node-id=1-2&t=9gzWY97i5A2jMVj5-1)
 
 ## Conclusión
 KATE ha sido una apuesta por transformar la complejidad técnica en una experiencia accesible y visualmente atractiva. A lo largo del desarrollo, se ha logrado fusionar con éxito tecnologías punteras como Fabrik8 y Three.js, creando una interfaz interactiva que ofrece una nueva manera de visualizar y controlar un clúster de Kubernetes.
